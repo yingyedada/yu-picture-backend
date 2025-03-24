@@ -27,7 +27,6 @@ public class FileController {
     @Resource
     private CosManager cosManager;
     @PostMapping("/test/upload")
-    @AuthCheck(mustRole = UserConstant.ADMIN_ROLE)
     public BaseResponse<String> testUploadFile(@RequestPart("file") MultipartFile multipartFile){
         String filename = multipartFile.getOriginalFilename();
         //文件路径
@@ -57,7 +56,6 @@ public class FileController {
      * @param filepath 文件路径
      * @param response 响应对象
      */
-    @AuthCheck(mustRole = UserConstant.ADMIN_ROLE)
     @GetMapping("/test/download/")
     public void testDownloadFile(String filepath, HttpServletResponse response) throws IOException {
         COSObjectInputStream cosObjectInput = null;

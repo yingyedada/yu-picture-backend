@@ -24,6 +24,11 @@ public class Picture {
      * 图片 url
      */
     private String url;
+    /**
+     * 缩略图 url
+     */
+    private String thumbnailUrl;
+
 
     /**
      * 图片名称
@@ -76,6 +81,11 @@ public class Picture {
     private Long userId;
 
     /**
+     * 空间 id
+     */
+    private Long spaceId;
+
+    /**
      * 创建时间
      */
     private Date createTime;
@@ -108,6 +118,10 @@ public class Picture {
      * 审核时间
      */
     private Date reviewTime;
+    /**
+     * 图片主色调
+     */
+    private String picColor;
 
 
     /**

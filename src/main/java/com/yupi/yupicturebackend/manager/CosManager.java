@@ -1,5 +1,6 @@
 package com.yupi.yupicturebackend.manager;
 
+import cn.hutool.core.io.FileUtil;
 import com.qcloud.cos.COSClient;
 import com.qcloud.cos.exception.CosClientException;
 import com.qcloud.cos.exception.CosServiceException;
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.io.File;
+import java.util.LinkedList;
+import java.util.List;
 
 @Component
 public class CosManager {
@@ -55,10 +58,31 @@ public class CosManager {
         PicOperations picOperations = new PicOperations();
         // 1 表示返回原图信息
         picOperations.setIsPicInfo(1);
+        String webKey = FileUtil.mainName(key) +".webp";
+        List<PicOperations.Rule> ruleList = new LinkedList<>();
+        PicOperations.Rule rule1 = new PicOperations.Rule();
+        rule1.setBucket(cosClientConfig.getBucket());
+        rule1.setFileId(webKey);
+        rule1.setRule("imageMogr2/format/webp");
+        if(file.length() > 2 * 1024){
+            PicOperations.Rule rule2 = new PicOperations.Rule();
+            rule2.setBucket(cosClientConfig.getBucket());
+            String thumbnail = FileUtil.mainName(key) + "_thumbnail." + FileUtil.getSuffix(file);
+            rule2.setFileId(thumbnail);
+            rule2.setRule(String.format("imageMogr2/thumbnail/%sx%s>",128,128));
+            ruleList.add(rule2);
+        }
+
+        ruleList.add(rule1);
+
         // 构造处理参数
         putObjectRequest.setPicOperations(picOperations);
+        picOperations.setRules(ruleList);
         return cosClient.putObject(putObjectRequest);
     }
 
+    public void deleteObject(String key){
+        cosClient.deleteObject(cosClientConfig.getBucket(),key);
+    }
 
 }

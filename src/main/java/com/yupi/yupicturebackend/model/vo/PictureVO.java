@@ -20,8 +20,13 @@ public class PictureVO implements Serializable {
     /**  
      * 图片 url  
      */  
-    private String url;  
-  
+    private String url;
+
+    /**
+     * 缩略图 url
+     */
+    private String thumbnailUrl;
+
     /**  
      * 图片名称  
      */  
@@ -70,8 +75,13 @@ public class PictureVO implements Serializable {
     /**  
      * 用户 id  
      */  
-    private Long userId;  
-  
+    private Long userId;
+
+    /**
+     * 空间 id
+     */
+    private Long spaceId;
+
     /**  
      * 创建时间  
      */  
@@ -86,7 +96,12 @@ public class PictureVO implements Serializable {
      * 更新时间  
      */  
     private Date updateTime;
-  
+
+    /**
+     * 图片主色调
+     */
+    private String picColor;
+
     /**  
      * 创建用户信息  
      */  
