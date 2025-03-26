@@ -1,10 +1,9 @@
 package com.yupi.yupicturebackend.service;
 
-import com.yupi.yupicturebackend.model.dto.space.analyze.SpaceCategoryAnalyzeRequest;
-import com.yupi.yupicturebackend.model.dto.space.analyze.SpaceUsageAnalyzeRequest;
+import com.yupi.yupicturebackend.model.dto.space.analyze.*;
+import com.yupi.yupicturebackend.model.entity.Space;
 import com.yupi.yupicturebackend.model.entity.User;
-import com.yupi.yupicturebackend.model.vo.space.analyze.SpaceCategoryAnalyzeResponse;
-import com.yupi.yupicturebackend.model.vo.space.analyze.SpaceUsageAnalyzeResponse;
+import com.yupi.yupicturebackend.model.vo.space.analyze.*;
 
 import java.util.List;
 
@@ -13,4 +12,12 @@ public interface SpaceAnalyzeService {
 
 
     List<SpaceCategoryAnalyzeResponse> getSpaceCategoryAnalyze(SpaceCategoryAnalyzeRequest spaceCategoryAnalyzeRequest, User loginUser);
+
+    List<SpaceTagAnalyzeResponse> getSpaceTagAnalyze(SpaceTagAnalyzeRequest spaceTagAnalyzeRequest, User loginUser);
+
+    List<SpaceSizeAnalyzeResponse> getSpaceSizeAnalyze(SpaceSizeAnalyzeRequest spaceSizeAnalyzeRequest, User loginUser);
+
+    List<SpaceUserAnalyzeResponse> getSpaceUserAnalyze(SpaceUserAnalyzeRequest spaceUserAnalyzeRequest, User loginUser);
+
+    List<Space> getSpaceRankAnalyze(SpaceRankAnalyzeRequest spaceRankAnalyzeRequest, User loginUser);
 }
