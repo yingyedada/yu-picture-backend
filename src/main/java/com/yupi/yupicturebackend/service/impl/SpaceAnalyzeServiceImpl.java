@@ -103,7 +103,7 @@ public class SpaceAnalyzeServiceImpl implements SpaceAnalyzeService {
         QueryWrapper<Picture> queryWrapper = new QueryWrapper<>();
         fillAnalyzeQueryWrapper(spaceCategoryAnalyzeRequest,queryWrapper);
         // select category,count(*),sum(pictureSize) from picture where spaceId = #{spaceId} group by category
-        queryWrapper.select("category AS category","count(*) AS count","sum(pictureSize) AS totalSize");
+        queryWrapper.select("category AS category","count(*) AS count","sum(picSize) AS totalSize");
         queryWrapper.groupBy("category");
         List<SpaceCategoryAnalyzeResponse> collect = pictureService.getBaseMapper().selectMaps(queryWrapper)
                 .stream()
