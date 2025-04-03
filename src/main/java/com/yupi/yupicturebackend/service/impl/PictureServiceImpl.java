@@ -97,10 +97,10 @@ public class PictureServiceImpl extends ServiceImpl<PictureMapper, Picture>
                 throw new BusinessException(ErrorCode.NOT_FOUND_ERROR,"上传的空间不存在");
             }
             // 判断是不是当前空间的管理员
-            boolean equals = space.getUserId().equals(loginUser.getId());
-            if(!equals){
-                throw new BusinessException(ErrorCode.NO_AUTH_ERROR,"无权限");
-            }
+//            boolean equals = space.getUserId().equals(loginUser.getId());
+//            if(!equals){
+//                throw new BusinessException(ErrorCode.NO_AUTH_ERROR,"无权限");
+//            }
             // 判断空间额度是否足够
             if(space.getMaxCount() <= space.getTotalCount()){
                 throw new BusinessException(ErrorCode.OPERATION_ERROR,"空间条数不足");
@@ -478,10 +478,10 @@ public class PictureServiceImpl extends ServiceImpl<PictureMapper, Picture>
         Picture oldPicture = this.getById(id);
         ThrowUtils.throwIf(oldPicture == null, ErrorCode.NOT_FOUND_ERROR);
         // 仅本人或管理员可删除
-        checkPictureAuth(loginUser,oldPicture);
+        // checkPictureAuth(loginUser,oldPicture);
         // 删除cos服务中存储的图片
         // 校验权限
-        checkPictureAuth(loginUser, oldPicture);
+        // checkPictureAuth(loginUser, oldPicture);
         // 开启事务
         transactionTemplate.execute(status -> {
             // 操作数据库
